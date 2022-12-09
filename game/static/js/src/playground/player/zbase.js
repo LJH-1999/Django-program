@@ -145,7 +145,7 @@ class Player extends AcGameObject {
         this.render();
     }
 
-    render() {
+    render() {// 渲染
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         this.ctx.fillStyle = this.color;
