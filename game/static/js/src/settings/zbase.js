@@ -2,8 +2,11 @@ class Settings {
     constructor(root) {
         this.root = root;
         this.platform = "WEB"; // 默认是web端
-        if (this.root.AcWingOS) this.platform = "ACAPP";
-
+        if (this.root.AcWingOS) {
+            this.platform = "ACAPP";
+        }
+        this.username = "";
+        this.photo = "";
         this.start();
     }
 
@@ -26,9 +29,11 @@ class Settings {
             data: {
                 platform: outer.platform,
             },
-            success: function(resp) {
+            success: function(resp) {//resp是返回的dist
                 console.log(resp);
                 if (resp.result === "success") {
+                    outer.username = resp.username;
+                    outer.photo = resp.photo;
                     outer.hide();
                     outer.root.menu.show();
                 } else {//否则要登录

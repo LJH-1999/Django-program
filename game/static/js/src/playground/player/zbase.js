@@ -21,6 +21,11 @@ class Player extends AcGameObject {
 
         this.cur_skill = null;
 
+        if (this.is_me) {//如果是用户自己，把头像传过来
+            this.img = new Image();
+            this.img.src = this.playground.root.settings.photo;
+        }
+
 
     }
 
@@ -146,10 +151,20 @@ class Player extends AcGameObject {
     }
 
     render() {// 渲染
-        this.ctx.beginPath();
-        this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        this.ctx.fillStyle = this.color;
-        this.ctx.fill();
+        if (this.is_me) {//如果是自己的话渲染一个头像
+            this.ctx.save();
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            this.ctx.stroke();
+            this.ctx.clip();
+            this.ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+            this.ctx.restore();
+        } else {//如果不是自己的话随机一个圆
+            this.ctx.beginPath();
+            this.ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+            this.ctx.fillStyle = this.color;
+            this.ctx.fill();
+        }
     }
 
     on_destroy() {
