@@ -34,8 +34,16 @@ class Settings {
         <div class="ac-game-settings-option">
             注册
         </div>
+        <br>
+        <div class="ac-game-settings-acwing">
+            <img width="30" src="https://app4189.acapp.acwing.com.cn/static/image/settings/acwing_logo.png">
+            <div>
+                AcWing一键登录
+            </div>
+        </div>
     </div>
     <div class="ac-game-settings-register">
+
     </div>
 </div>
 `);

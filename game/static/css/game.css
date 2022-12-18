@@ -41,6 +41,11 @@
     height: 7vh;
 }
 
+.ac-game-settings-acwing {
+    display: block;
+    height: 7vh;
+}
+
 .ac-game-settings-item {
     width: 100%;
     height: 100%;
@@ -64,7 +69,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #309804;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .ac-game-settings-error-messages {
@@ -82,6 +87,19 @@
     float: right;
     padding-right: 1vw;
     cursor: pointer;
+}
+
+.ac-game-settings-acwing > img {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+.ac-game-settings-acwing > div {
+    color: white;
+    font-size: 1.5vh;
+    text-align: center;
 }
 
 .ac-game-settings-register {
