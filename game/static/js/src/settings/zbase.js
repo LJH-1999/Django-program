@@ -29,7 +29,7 @@ class Settings {
            </div>
        </div>
        <div class="ac-game-settings-error-message">
-           用户名密码错误
+
        </div>
        <div class="ac-game-settings-option">
            注册
@@ -57,7 +57,7 @@ class Settings {
                 <input type="password" placeholder="密码">
             </div>
         </div>
-        <div class="ac-game-settings-password-second">
+        <div class="ac-game-settings-password ac-game-settings-password-second">
             <div class="ac-game-settings-item">
                 <input type="password" placeholder="确认密码">
             </div>
@@ -114,15 +114,68 @@ class Settings {
         this.add_listening_events_register();
     }
 
-    add_listening_events_login() {
+    add_listening_events_login() { //在登录界面的监听点击
         let outer = this;
 
-        this.$login.click(function() {
+        this.$login_register.click(function() {//点击注册
             outer.register();
+        });
+
+        this.$login_submit.click(function() {//点击登录按钮
+            outer.login_on_remote();
         });
     }
 
-    add_listening_events_register() {
+    add_listening_events_register() {//在注册界面的监听点击
+        let outer = this;
+
+        this.$register_login.click(function() {
+            outer.login();
+        });
+    }
+
+    login_on_remote() {//在后端登录
+        let outer = this;
+
+        let username = this.$login_username.val();
+        let password = this.$login_password.val();
+        this.$login_error_message.empty();
+
+        $.ajax({
+            url: "https://app4189.acapp.acwing.com.cn/settings/login",
+            type: "GET",
+            data: {
+                username: username,
+                password: password,
+            },
+            success: function(resp) {
+                console.log(resp);
+                if (resp.result === "success") {
+                    location.reload();
+                } else {
+                    outer.$login_error_message.html(resp.result);
+                }
+            }
+        });
+
+    }
+
+    register_on_remote(){//在后端注册
+    }
+
+    logout_on_remote(){//在后端登出
+        if (this.platform === "ACAPP") return false;
+
+        $.ajax({
+            url: "https://app4189.acapp.acwing.com.cn/settings/logout/",
+            type: "GET",
+            success: function(resp) {
+                console.log(resp);
+                if (resp.result === "success") {
+                    location.reload();
+                }
+            }
+        });
     }
 
     register() { //打开注册界面

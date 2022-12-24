@@ -70,6 +70,7 @@
     transform: translate(-50%, -50%);
     background-color: #309804;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .ac-game-settings-error-message {
