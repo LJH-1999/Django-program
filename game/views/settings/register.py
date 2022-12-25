@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 from django.contrib.auth import login
 from django.contrib.auth.models import User
-from game.models.player.player import player
+from game.models.player.player import Player
+
 
 def register(request):
     data = request.GET
@@ -16,11 +17,15 @@ def register(request):
         return JsonResponse({
             'result': "两次密码不一致",
         })
-    if User.objects.filter(username=username).exits():
+    if User.objects.filter(username=username).exists():
         return JsonResponse({
             'result': "用户名已存在"
         })
     user = User(username=username)
     user.set_password(password)
     user.save()
-    Player.objects.create(user=user,)
+    Player.objects.create(user=user, photo="https://inews.gtimg.com/newsapp_bt/0/14681617890/1000")
+    login(request, user)
+    return JsonResponse({
+        'result': "success",
+    })
